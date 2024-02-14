@@ -1,0 +1,1742 @@
+{
+	"info": {
+		"_postman_id": "7086eede-e484-42cf-8f8a-c6a802bdc6e5",
+		"name": "Skyeng",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30437095",
+		"_collection_link": "https://www.postman.com/yesmad/workspace/trello/collection/30437095-7086eede-e484-42cf-8f8a-c6a802bdc6e5?action=share&source=collection_link&creator=30437095"
+	},
+	"item": [
+		{
+			"name": "Позитивные проверки",
+			"item": [
+				{
+					"name": "ЛС с валидным именем",
+					"item": [
+						{
+							"name": "ЛС с валидным названием",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"backgroundColor\":\"#F4F5F6\",\"color\":\"#81888D\",\"description\":\"yes descr\",\"title\":\"{{$randomCity}}\",\"startAt\":\"2023-11-27T16:30:00+03:00\",\"endAt\":\"2023-11-27T17:00:00+03:00\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/createPersonal",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"createPersonal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос расписания",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"from\": \"2023-11-27T16:30:00+03:00\",\r\n    \"till\": \"2023-11-27T17:00:00+03:00\",\r\n    \"onlyTypes\": [\r\n        \"event\",\r\n        \"slot\"\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"events"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ЛС редактирование названия",
+					"item": [
+						{
+							"name": "Создание ЛС",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var key = \"ID_event\"\r",
+											"var value = pm.response.json().data.payload.id\r",
+											"\r",
+											"pm.collectionVariables.set(key, value)\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"backgroundColor\":\"#F4F5F6\",\"color\":\"#81888D\",\"description\":\"yes descr\",\"title\":\"horse no name\",\"startAt\":\"2023-11-27T16:30:00+03:00\",\"endAt\":\"2023-11-28T17:00:00+03:00\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/createPersonal",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"createPersonal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос расписания до ред",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"from\":\"2023-11-23T17:30:00+03:00\",\"till\":\"2023-11-23T19:00:00+03:00\",\"onlyTypes\":[\"event.class\",\"slot\"]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"events"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Редактирование ЛС (строка название)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"backgroundColor\":\"#F4F5F6\",\"color\":\"#81888D\",\"description\":\"yes descr\",\"title\":\"{{$randomCity}}\",\"startAt\":\"2023-11-27T16:30:00+03:00\",\"endAt\":\"2023-11-28T17:00:00+03:00\",\"id\":{{ID_event}},\"oldStartAt\":\"2023-11-27T16:30:00+03:00\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/updatePersonal",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"updatePersonal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос расписания после ред",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"from\":\"2023-11-27T16:30:00+03:00\",\"till\":\"2023-11-27T17:00:00+03:00\",\"onlyTypes\":[\"event\",\"slot\"]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"events"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ЛС цвет по умолчанию",
+					"item": [
+						{
+							"name": "Создание личного без указания цвета (по умолчанию #81888D)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"backgroundColor\":\"#F4F5F6\",\"color\":\"\",\"description\":\"\",\"title\":\"{{$randomCity}}\",\"startAt\":\"2023-11-27T16:30:00+03:00\",\"endAt\":\"2023-11-27T17:00:00+03:00\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/createPersonal",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"createPersonal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос расписания",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"from\":\"2023-11-27T16:30:00+03:00\",\"till\":\"2023-11-27T17:00:00+03:00\",\"onlyTypes\":[\"event\",\"slot\"]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"events"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ЛС без описания",
+					"item": [
+						{
+							"name": "Создание личного без описания",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"backgroundColor\":\"#F4F5F6\",\"color\":\"#81888D\",\"description\":\"\",\"title\":\"{{$randomCity}}\",\"startAt\":\"2023-11-27T16:30:00+03:00\",\"endAt\":\"2023-11-27T17:00:00+03:00\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/createPersonal",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"createPersonal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос расписания",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"from\":\"2023-11-27T16:30:00+03:00\",\"till\":\"2023-11-27T17:00:00+03:00\",\"onlyTypes\":[\"event\",\"slot\"]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"events"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ЛС поверх ЛС",
+					"item": [
+						{
+							"name": "Создание ЛС",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"backgroundColor\":\"#F4F5F6\",\"color\":\"#81888D\",\"description\":\"yes descr\",\"title\":\"horse no name\",\"startAt\":\"2023-11-27T16:30:00+03:00\",\"endAt\":\"2023-11-27T17:00:00+03:00\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/createPersonal",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"createPersonal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос расписания одно лс",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"from\":\"2023-11-23T17:30:00+03:00\",\"till\":\"2023-11-23T19:00:00+03:00\",\"onlyTypes\":[\"event.class\",\"slot\"]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"events"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Создание ЛС поверх ЛС",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"backgroundColor\":\"#F4F5F6\",\"color\":\"#81888D\",\"description\":\"yes descr\",\"title\":\"horse YES name\",\"startAt\":\"2023-11-27T16:30:00+03:00\",\"endAt\":\"2023-11-27T17:00:00+03:00\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/createPersonal",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"createPersonal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос расписания два лс",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"from\":\"2023-11-27T16:30:00+03:00\",\"till\":\"2023-11-27T17:00:00+03:00\",\"onlyTypes\":[\"event\",\"slot\"]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"events"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ЛС на весь день",
+					"item": [
+						{
+							"name": "Создание личного на весь день",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"backgroundColor\":\"#F4F5F6\",\"color\":\"#81888D\",\"description\":\"thatistheway\",\"title\":\"fullday\",\"startAt\":\"2023-11-28T09:30:00+03:00\",\"endAt\":\"2023-11-28T22:00:00+03:00\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/createPersonal",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"createPersonal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос расписания",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"from\":\"2023-11-28T09:30:00+03:00\",\"till\":\"2023-11-28T22:00:00+03:00\",\"onlyTypes\":[\"event\",\"slot\"]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"events"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ЛС другого валидного цвета",
+					"item": [
+						{
+							"name": "Создание ЛС валидного цвета",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"backgroundColor\":\"#EBFDF2\",\"color\":\"#43B658\",\"description\":\"\",\"title\":\"green\",\"startAt\":\"2023-11-27T17:30:00+03:00\",\"endAt\":\"2023-11-27T18:00:00+03:00\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/createPersonal",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"createPersonal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос расписания",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"from\":\"2023-11-27T17:30:00+03:00\",\"till\":\"2023-11-27T18:00:00+03:00\",\"onlyTypes\":[\"event\",\"slot\"]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"events"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Перенос ЛС на другое время",
+					"item": [
+						{
+							"name": "Создание ЛС",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var key = \"ID_event\"\r",
+											"var value = pm.response.json().data.payload.id\r",
+											"\r",
+											"pm.collectionVariables.set(key, value)\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"backgroundColor\":\"#F4F5F6\",\"color\":\"#81888D\",\"description\":\"yes descr\",\"title\":\"liveweight\",\"startAt\":\"2023-11-27T17:00:00+03:00\",\"endAt\":\"2023-11-27T17:30:00+03:00\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/createPersonal",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"createPersonal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос расписания до",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"from\":\"2023-11-23T17:30:00+03:00\",\"till\":\"2023-11-23T19:00:00+03:00\",\"onlyTypes\":[\"event.class\",\"slot\"]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"events"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Перенос ЛС на другое время",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"backgroundColor\":\"#F4F5F6\",\"color\":\"#81888D\",\"description\":\"yes descr\",\"title\":\"liveweight\",\"startAt\":\"2023-11-29T18:30:00+03:00\",\"endAt\":\"2023-11-29T19:00:00+03:00\",\"id\":{{ID_event}},\"oldStartAt\":\"2023-11-27T17:00:00+03:00\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/updatePersonal",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"updatePersonal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос расписания после",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"from\":\"2023-11-29T17:30:00+03:00\",\"till\":\"2023-11-29T19:00:00+03:00\",\"onlyTypes\":[\"event\",\"slot\"]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"events"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Удаление ЛС",
+					"item": [
+						{
+							"name": "Создание ЛС",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var key = \"ID_event\"\r",
+											"var value = pm.response.json().data.payload.id\r",
+											"\r",
+											"pm.collectionVariables.set(key, value)\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"backgroundColor\":\"#F4F5F6\",\"color\":\"#81888D\",\"description\":\"yes descr\",\"title\":\"horse no name\",\"startAt\":\"2023-11-28T17:30:00+03:00\",\"endAt\":\"2023-11-28T18:00:00+03:00\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/createPersonal",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"createPersonal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Удаление личного",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"id\":{{ID_event}},\"startAt\":\"2023-11-27T17:30:00+00:00\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/removePersonal",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"removePersonal"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Запрос расписания с ЛС",
+					"item": [
+						{
+							"name": "Запрос расписания",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"from\":\"2023-11-27T09:30:00+03:00\",\"till\":\"2023-11-27T22:00:00+03:00\",\"onlyTypes\":[\"event\",\"slot\"]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"events"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Негативные проверки",
+			"item": [
+				{
+					"name": "Не-валидное название ЛС",
+					"item": [
+						{
+							"name": "Создание личного с названием > 40 символов",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"backgroundColor\":\"#F4F5F6\",\"color\":\"#81888D\",\"description\":\"\",\"title\":\"Обучения равным постоянный существенных о\",\"startAt\":\"2023-11-28T13:30:00+03:00\",\"endAt\":\"2023-11-28T14:00:00+03:00\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/createPersonal",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"createPersonal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос расписания",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"from\":\"2023-11-28T13:30:00+03:00\",\"till\":\"2023-11-28T14:30:00+03:00\",\"onlyTypes\":[\"event\",\"slot\"]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"events"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ЛС на прошедшие дни",
+					"item": [
+						{
+							"name": "Создание личного на прошедшие дни",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"backgroundColor\":\"#F4F5F6\",\"color\":\"#81888D\",\"description\":\"\",\"title\":\"distant past\",\"startAt\":\"2023-11-22T13:30:00+03:00\",\"endAt\":\"2023-11-22T14:00:00+03:00\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/createPersonal",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"createPersonal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос расписания",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"from\":\"2023-11-22T13:30:00+03:00\",\"till\":\"2023-11-22T14:00:00+03:00\",\"onlyTypes\":[\"event\",\"slot\"]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"events"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ЛС с не-валидным цветом",
+					"item": [
+						{
+							"name": "Создание личного события с не-валидным цветом",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"backgroundColor\":\"#F4F5F6\",\"color\":\"#F4F5F6\",\"description\":\"\",\"title\":\"horse no name\",\"startAt\":\"2023-11-28T13:30:00+03:00\",\"endAt\":\"2023-11-28T14:00:00+03:00\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/createPersonal",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"createPersonal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос расписания",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"from\":\"2023-11-28T13:30:00+03:00\",\"till\":\"2023-11-28T14:30:00+03:00\",\"onlyTypes\":[\"event\",\"slot\"]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"events"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ЛС с юникодом",
+					"item": [
+						{
+							"name": "Создание личного с юникодом в описании",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"backgroundColor\":\"#F4F5F6\",\"color\":\"#81888D\",\"description\":\"\",\"title\":\"🤓\",\"startAt\":\"2023-11-28T13:30:00+03:00\",\"endAt\":\"2023-11-28T14:00:00+03:00\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/createPersonal",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"createPersonal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос расписания",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"from\":\"2023-11-28T13:30:00+03:00\",\"till\":\"2023-11-28T14:30:00+03:00\",\"onlyTypes\":[\"event\",\"slot\"]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"events"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ЛС без названия",
+					"item": [
+						{
+							"name": "Создание личного события без названия",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"backgroundColor\":\"#F4F5F6\",\"color\":\"#81888D\",\"description\":\"\",\"title\":\"\",\"startAt\":\"2023-11-28T13:30:00+03:00\",\"endAt\":\"2023-11-28T14:00:00+03:00\"}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/createPersonal",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"createPersonal"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Запрос расписания",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"from\":\"2023-11-28T13:30:00+03:00\",\"till\":\"2023-11-28T14:30:00+03:00\",\"onlyTypes\":[\"event\",\"slot\"]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/{{ver}}/{{tab}}/events",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"{{ver}}",
+										"{{tab}}",
+										"events"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://api-teachers.skyeng.ru"
+		},
+		{
+			"key": "ver",
+			"value": "v2"
+		},
+		{
+			"key": "tab",
+			"value": "schedule"
+		},
+		{
+			"key": "token",
+			"value": "token_global=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOjE0NTk2OTMzLCJpZGVudGl0eSI6InRlc3QudHN0MzE3QHNreWVuZy5ydSIsImlkZW50aXR5TG9naW4iOm51bGwsImlkZW50aXR5RW1haWwiOiJ0ZXN0LnRzdDMxN0Bza3llbmcucnUiLCJpZGVudGl0eVBob25lIjoiKzc5OTk1NTUzMzEwIiwibmFtZSI6Iklnb3IiLCJzdXJuYW1lIjoiXHUwNDEyXHUwNDM4XHUwNDQwXHUwNDQ3XHUwNDM4XHUwNDNhIiwiZW1haWwiOiJ0ZXN0LnRzdDMxN0Bza3llbmcucnUiLCJ1aUxhbmd1YWdlIjoicnUiLCJsb2NhbGUiOiJydSIsInNlcnZpY2VMb2NhbGUiOm51bGwsInVhcyI6MzAsImp3dFR5cGUiOjEsImp0aSI6IjhHcWlUNUh3cmNEUk15VWRrSk8zZ1JvRDdRb2hSVHRtIiwiYnJhbmQiOm51bGwsImV4cCI6MTcwMTE3MzA4NCwiYXZhdGFyVXJsIjoiaHR0cHM6XC9cL2F1dGgtYXZhdGFycy1za3llbmcuaW1naXgubmV0XC8xNDU5NjkzM1wvOThmNmJlYjUtZjA3Yi00MWViLThiYzItNDU3MTQwYTc0ODgzP2F1dG89Zm9ybWF0JTJDZW5oYW5jZSZmaXQ9Y3JvcCZoPTIwMCZpeGxpYj1waHAtMi4xLjEmcT03NSZzYXQ9OCZzaGFycD0xMCZ2aWI9OCZ3PTIwMCIsImJpcnRoZGF5IjoiMTk3MC0xMi0zMSIsImFJc1N0cm9uZyI6dHJ1ZSwiYVR5cGUiOiJVU0VSTkFNRV9QQVNTV09SRCIsImFUaW1lIjoxNzAwOTIyNTYxLCJyb2xlcyI6WyJST0xFX1RFQUNIRVJfQ0FORElEQVRFIiwiUk9MRV9URUFDSEVSX0NBTkRJREFURV9CQVNFX0FDQ0VTUyIsIlJPTEVfVFRDX1VTQUdFIiwiUk9MRV9WSU1CT1hfVEVBQ0hFUl9VU0FHRSIsIlJPTEVfVEVBQ0hFUiIsIlJPTEVfQ1JNMl9URUFDSEVSX0FDQ0VTUyIsIlJPTEVfTUFUSF9URUFDSEVSIiwiUk9MRV9NQVRIX0NPTlRFTlRfVEhFTUVfVklFVyJdfQ.f0gh4hXbfKlph33oUof0igJ1eLRuggjAYGAyoDVhBuSvJ-5Eb27dbZM1KhYh_vgW7pJqYnXwjXTUtpjkmzD7v2U7QvclHYfu174bbklRBMF3CuwiSCLNV2EtQg1GAaEASpC_y7P8rhoZZo6sy0M4jC9Gs1ISqRdyVA3NySvG0ARyY-ht4Ysabo31qJVNddwhoMTkiUuoiT7OjAYky1vM2GJ8dW7TVPVgkXIky3CNxcCC8OC-mH4NfWwf3Ws1dVZSjuxrEX_ppVCbtF7yirXWuYOZLIIrOZQmYGFnnGS9GVDbM0fbN-yvONGqHVKCSSwcjB3ikTrZdwGi8c5l7A1IeEC4wcs9pLIsqp2YHZdHPIDhA0BMlmuWXtzOe4AnvkwvVtY34TXKrojfOQ4nSpvfaofJVDVkMnteTnuSHmY8cKbbuWB1fa2k7H67-pza8iMjh0sdvXapFMnS6SsZrbRdgGKLXTCRzbOGSukmogH_ETbxjjmxXRLDkwHxq-ztiqjai23EG4ll0jiyuydi8Z7LT0b1SU0lhZ8C3Efte4474irUPphMoPBd7HE21U11PNZUlXFNHQfXYPhPSrC-_oDE51Cmg670IQDS0aGBv6c9yedmRjzu0we1NHSS3zvU_7m60yIHQxwe2GnwpsmejnOA4MvznSd_CApzs9Mrd0GYTQc"
+		}
+	]
+}
